@@ -42,14 +42,6 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
-      },
-      'api/mail': {
-        target: 'http://127.0.0.1:2004',
-        changeOrigin: true,
-        secure: false,
-        pathRewrite: {
-          '^/api': ''
-        }
       }
     }, // string | Object
     before: (app) => {
