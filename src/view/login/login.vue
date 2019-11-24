@@ -30,7 +30,8 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
+    import {mapMutations} from 'vuex'
+    import {login} from '@/api/user'
 
     export default {
         name: 'login',
@@ -72,17 +73,20 @@
             }
         },
         methods: {
-            ...mapActions([
-                'handleLogin',
-                'getUserInfo'
+            ...mapMutations([
+                'setToken'
             ]),
             handleSubmit() {
                 if (this.form.userName === '' || this.form.password === '') {
                     return;
                 }
 
-                console.log(this.form);
-                this.accountError = true
+                login(this.form).then(res => {
+                    console.log(res)
+                });
+
+                // console.log(this.form);
+                // this.accountError = true
                 // this.handleLogin({userName, password}).then(() => {
                 //     localStorage.setItem('token', '这是一个假的token');
                 //     this.$router.push({

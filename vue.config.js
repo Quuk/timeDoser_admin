@@ -35,8 +35,8 @@ module.exports = {
     hotOnly: false,
     // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#配置代理
     proxy: {
-      '/api/qinghi': {
-        target: 'http://127.0.0.1:2001',
+      '/api/timeDoser': {
+        target: 'http://127.0.0.1:1901',
         changeOrigin: true,
         secure: false,
         pathRewrite: {
