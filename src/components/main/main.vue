@@ -34,7 +34,6 @@
 <script>
     import SideMenu from './components/side-menu'
     import HeaderBar from './components/header-bar'
-    import TagsNav from './components/tags-nav'
     import User from './components/user'
     import ABackTop from './components/a-back-top'
     import Fullscreen from './components/fullscreen'
@@ -53,7 +52,6 @@
             SideMenu,
             HeaderBar,
             Language,
-            TagsNav,
             Fullscreen,
             ErrorStore,
             User,
