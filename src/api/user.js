@@ -1,16 +1,14 @@
 import axios from '@/libs/api.request'
 
-export const login = ({ userName, password }) => {
-  const data = {
-    userName,
-    password
-  }
+
+// 管理后台登录
+export const login = formData => {
   return axios.request({
-    url: '/setting/login',
-    data: data,
-    method: 'post'
+    url: '/api/timeDoser/login/login',
+    method: 'post',
+    data: formData
   })
-}
+};
 
 export const getUserInfo = (token) => {
   return axios.request({

@@ -1,5 +1,5 @@
 import {getContentByMsgId, getMessage, getUserInfo, hasRead, removeReaded, restoreTrash} from '@/api/user'
-import {adminLogin} from '@/api/data'
+import {login} from '@/api/user'
 import {getToken, setToken} from '@/libs/util'
 
 export default {
@@ -71,7 +71,7 @@ export default {
         const param = new FormData();
         param.append('account', userName);
         param.append('password', password);
-        adminLogin(param).then(res => {
+        login(param).then(res => {
           if (res.data.success === true) {
             commit('setToken', 'admin')
             commit('setAccess', ['admin'])
