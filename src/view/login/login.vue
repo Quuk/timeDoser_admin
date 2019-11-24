@@ -82,7 +82,7 @@
                 }
 
                 login(this.form).then(res => {
-                    console.log(res)
+                    console.log("到这里就请求结束了")
                 });
 
                 // console.log(this.form);
