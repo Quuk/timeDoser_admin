@@ -50,53 +50,6 @@ export default [
     ]
   },
   {
-    path: '/components',
-    name: 'components',
-    meta: {
-      icon: 'ios-hammer',
-      title: '系统管理'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'controller',
-        name: 'controller',
-        meta: {
-          icon: 'md-options',
-          title: '控制台'
-        },
-        component: () => import('@/view/actity/controller.vue')
-      },
-      {
-        path: 'industry_class',
-        name: 'industry_class',
-        meta: {
-          icon: 'md-briefcase',
-          title: '行业信息'
-        },
-        component: () => import('@/view/actity/industry.vue')
-      },
-      {
-        path: 'coupon',
-        name: 'coupon',
-        meta: {
-          icon: 'md-paper',
-          title: '优惠券'
-        },
-        component: () => import('@/view/actity/coupons.vue')
-      },
-      {
-        path: 'business',
-        name: 'business',
-        meta: {
-          icon: 'md-cart',
-          title: '商品相关'
-        },
-        component: () => import('@/view/actity/business.vue')
-      }
-    ]
-  },
-  {
     path: '/actity',
     name: 'actity',
     meta: {
@@ -106,42 +59,6 @@ export default [
     component: Main,
     children: [
       {
-        path: 'newCustomer',
-        name: 'newCustomer',
-        meta: {
-          icon: 'md-contact',
-          title: '新增用户信息'
-        },
-        component: () => import('@/view/actity/newCustomer.vue')
-      },
-      {
-        path: 'newCompany',
-        name: 'newCompany',
-        meta: {
-          icon: 'md-contacts',
-          title: '新增企业信息'
-        },
-        component: () => import('@/view/actity/newCompany.vue')
-      },
-      {
-        path: 'newOrder',
-        name: 'newOrder',
-        meta: {
-          icon: 'md-card',
-          title: '新增订单信息'
-        },
-        component: () => import('@/view/actity/newOrder.vue')
-      },
-      {
-        path: 'operationalData',
-        name: 'operationalData',
-        meta: {
-          icon: 'md-trending-up',
-          title: '运营数据'
-        },
-        component: () => import('@/view/actity/operationalData.vue')
-      },
-      {
         path: 'temp',
         name: 'temp',
         meta: {
@@ -149,25 +66,6 @@ export default [
           title: 'temp'
         },
         component: () => import('@/view/actity/temp.vue')
-      }
-    ]
-  },
-  {
-    path: '/companys',
-    name: 'companys',
-    meta: {
-      hideInBread: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'company',
-        name: 'company',
-        meta: {
-          icon: 'md-apps',
-          title: '公司相关'
-        },
-        component: () => import('@/view/actity/company.vue')
       }
     ]
   },
