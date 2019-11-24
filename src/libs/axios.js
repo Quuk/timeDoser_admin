@@ -25,11 +25,10 @@ class HttpRequest {
     }
 
     getInsideConfig() {
-        const config = {
+        return {
             baseURL: this.baseUrl,
             headers: {}
-        };
-        return config
+        }
     }
 
     destroy(url) {
@@ -50,7 +49,7 @@ class HttpRequest {
         instance.interceptors.response.use(res => {
             this.destroy(url);
             const {data, status} = res;
-            return {data, status}
+            return {data, status};
         }, error => {
             this.destroy(url);
             let errorInfo = error.response;
@@ -71,7 +70,6 @@ class HttpRequest {
         const instance = axios.create();
         options = Object.assign(this.getInsideConfig(), options);
         this.interceptors(instance, options.url);
-        console.log("6");
         return instance(options)
     }
 }
