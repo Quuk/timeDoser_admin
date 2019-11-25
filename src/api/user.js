@@ -3,7 +3,7 @@ import axios from '@/libs/api.request'
 // 管理后台登录
 export const login = formData => {
     return axios.request({
-        url: '/timeDoser/login/login',
+        url: '/api/timeDoser/login/login',
         method: 'post',
         data: formData
     })
