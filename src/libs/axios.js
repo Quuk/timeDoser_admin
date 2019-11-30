@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-// import router from '../router'
+import {getToken} from '@/libs/util'
 
 /**
  * 添加错误日志
@@ -74,5 +74,8 @@ class HttpRequest {
     }
 }
 
-console.log("通过了/lib/axios.js-----");
+// 如果未登录,则强制跳转到登录页面
+if (window.location.pathname !== "/login" && !getToken()) {
+    window.location.replace("/login")
+}
 export default HttpRequest
