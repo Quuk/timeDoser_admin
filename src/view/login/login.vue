@@ -1,30 +1,30 @@
 <style lang="less">
-    @import './login.less';
+  @import './login.less';
 </style>
 
 <template>
-    <div class="login">
-        <Card class="login-con">
-            <div style="display: flex;justify-content: center;margin-bottom:20px">
-                <h3>登录</h3>
-            </div>
-            <Form ref="formInline" :model="formInline" :rules="ruleInline">
-                <FormItem prop="user">
-                    <Input type="text" v-model="formInline.user" placeholder="邮箱">
-                        <Icon style="height: 14px" type="ios-person-outline" slot="prepend"></Icon>
-                    </Input>
-                </FormItem>
-                <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" placeholder="密码">
-                        <Icon style="height: 14px" type="ios-lock-outline" slot="prepend"></Icon>
-                    </Input>
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" long @click="handleSubmit('formInline')">验证</Button>
-                </FormItem>
-            </Form>
-        </Card>
-    </div>
+  <div class="login">
+    <Card class="login-con">
+      <div style="display: flex;justify-content: center;margin-bottom:20px">
+        <h3>登录</h3>
+      </div>
+      <Form ref="formInline" :model="formInline" :rules="ruleInline">
+        <FormItem prop="user">
+          <Input type="text" v-model="formInline.user" placeholder="邮箱">
+            <Icon style="height: 14px" type="ios-person-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem prop="password">
+          <Input type="password" v-model="formInline.password" placeholder="密码">
+            <Icon style="height: 14px" type="ios-lock-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" long @click="handleSubmit('formInline')">验证</Button>
+        </FormItem>
+      </Form>
+    </Card>
+  </div>
 </template>
 
 <script>
@@ -69,9 +69,9 @@
                         login(param).then(res => {
                             if (res.data.code === 200) {
                                 this.handleLogin(res.data.data).then(() => {
-                                    // this.$router.push({
-                                    //     name: this.$config.homeName
-                                    // })
+                                    this.$router.push({
+                                        name: this.$config.homeName
+                                    })
                                 });
                             }
                         });
