@@ -7,8 +7,6 @@
 </template>
 
 <script>
-    import InforCard from '_c/info-card'
-    import CountTo from '_c/count-to'
     import echarts from 'echarts'
     import {off, on} from '@/libs/tools'
 
