@@ -21,7 +21,7 @@
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
-                <div class="left" style="background-color: #ff7751">
+                <div class="left" style="background-color: #00bf72">
                     <Icon type="md-brush" style="color: white" size="33"/>
                 </div>
                 <div style="width: 60%">
@@ -38,7 +38,7 @@
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
-                <div class="left" style="background-color: #ff7751">
+                <div class="left" style="background-color: #ff9736">
                     <Icon type="md-desktop" style="color: white" size="33"/>
                 </div>
                 <div style="width: 60%">
@@ -55,7 +55,7 @@
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
-                <div class="left" style="background-color: #ff7751">
+                <div class="left" style="background-color: #008eea">
                     <Icon type="logo-rss" style="color: white" size="33"/>
                 </div>
                 <div style="width: 60%">
