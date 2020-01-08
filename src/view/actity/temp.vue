@@ -13,7 +13,6 @@
 
     export default {
         name: 'home',
-        components: {InforCard, CountTo},
         data() {
             return {
                 buttonType: 0, // 0:打卡统计 1:注册统计 2:汇报统计 3: 企业统计
