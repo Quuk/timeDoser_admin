@@ -1,6 +1,7 @@
 <template>
     <div style="height: 300px;margin-top: 5px">
         <div style="display: flex">
+
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
@@ -9,15 +10,18 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">{{count.allUserCount}}</div>
-                        <div style="align-self: flex-end;margin-bottom: 3px;color: green">
-                            <Icon type="ios-arrow-up" style="width: 9px;"/>
-                            2
+                        <div class="right">{{count.allUserSum}}</div>
+                        <div :class="count.userAdd>0?'index-count-up':'index-count-down'">
+                            <Icon v-if="count.userAdd>0" type="ios-arrow-up" style="width: 9px;"/>
+                            <Icon v-else-if="count.userAdd===0" type="md-remove" style="width: 9px;"/>
+                            <Icon v-else type="ios-arrow-down" style="width: 9px;"></Icon>
+                            {{Math.abs(count.userAdd)}}
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户数</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户</div>
                 </div>
             </div>
+
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
@@ -26,15 +30,18 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">{{count.yesterdayCount}}</div>
-                        <div style="align-self: flex-end;margin-bottom: 3px;color: red">
-                            <Icon type="ios-arrow-down" style="width: 9px;"/>
-                            3
+                        <div class="right">{{count.userAdd}}</div>
+                        <div :class="count.userAdd - count.exUserAdd>0?'index-count-up':'index-count-down'">
+                            <Icon v-if="count.userAdd - count.exUserAdd>0" type="ios-arrow-up" style="width: 9px;"/>
+                            <Icon v-else-if="count.userAdd - count.exUserAdd===0" type="md-remove" style="width: 9px;"/>
+                            <Icon v-else type="ios-arrow-down" style="width: 9px;"></Icon>
+                            {{Math.abs(count.userAdd - count.exUserAdd)}}
                         </div>
                     </div>
                     <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日新增用户</div>
                 </div>
             </div>
+
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
@@ -43,15 +50,20 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">{{count.yesterdayCreatTimeCount}}</div>
-                        <div style="align-self: flex-end;margin-bottom: 3px;color: red">
-                            <Icon type="ios-arrow-down" style="width: 9px;"/>
-                            5
+                        <div class="right">{{count.yesUsedSum}}</div>
+                        <div :class="count.yesUsedSum - count.exYesUsedSum>0?'index-count-up':'index-count-down'">
+                            <Icon v-if="count.yesUsedSum - count.exYesUsedSum>0" type="ios-arrow-up"
+                                  style="width: 9px;"/>
+                            <Icon v-else-if="count.yesUsedSum - count.exYesUsedSum===0" type="md-remove"
+                                  style="width: 9px;"/>
+                            <Icon v-else type="ios-arrow-down" style="width: 9px;"></Icon>
+                            {{Math.abs(count.yesUsedSum - count.exYesUsedSum)}}
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日学习时间</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日活跃账户</div>
                 </div>
             </div>
+
             <div class="index-displayCard"
                  onMouseOver="this.style='box-shadow: -1px 1px 2px 0.5px #c5c5c5;border: 0;transform:translateY(-1px)'"
                  onmouseout="this.style='box-shadow: 0;border: 0.5px solid #dfdfdf'">
@@ -60,13 +72,15 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">{{count.yesterdayUsedCount}}</div>
-                        <div style="align-self: flex-end;margin-bottom: 3px;color: red">
-                            <Icon type="ios-arrow-down" style="width: 9px;"/>
-                            5
+                        <div class="right">{{count.workSum}}</div>
+                        <div :class="count.workSum - count.exWorkSum>0?'index-count-up':'index-count-down'">
+                            <Icon v-if="count.workSum - count.exWorkSum>0" type="ios-arrow-up" style="width: 9px;"/>
+                            <Icon v-else-if="count.workSum - count.exWorkSum===0" type="md-remove" style="width: 9px;"/>
+                            <Icon v-else type="ios-arrow-down" style="width: 9px;"></Icon>
+                            {{Math.abs(count.workSum - count.exWorkSum)}}
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日活跃用户</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日学习时间</div>
                 </div>
             </div>
         </div>
@@ -80,11 +94,14 @@
         name: 'home',
         data() {
             return {
-                count:{
-                    allUserCount: 0,
-                    yesterdayCount: 0,
-                    yesterdayCreatTimeCount: 0,
-                    yesterdayUsedCount: 0,
+                count: {
+                    allUserSum: 0,
+                    exUserAdd: 0,
+                    exWorkSum: 0,
+                    exYesUsedSum: 0,
+                    userAdd: 0,
+                    workSum: 0,
+                    yesUsedSum: 0,
                 }
             }
         },
@@ -94,7 +111,7 @@
         methods: {
             getAdminCount() {
                 adminCount().then(res => {
-                  this.count = res.data.data;
+                    this.count = res.data.data;
                 })
             }
         }
@@ -135,5 +152,17 @@
             font-size: 24px;
             margin: 5px 5px 0 5px;
         }
+    }
+
+    .index-count-up {
+        align-self: flex-end;
+        margin-bottom: 3px;
+        color: green;
+    }
+
+    .index-count-down {
+        align-self: flex-end;
+        margin-bottom: 3px;
+        color: red;
     }
 </style>
