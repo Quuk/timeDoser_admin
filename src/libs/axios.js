@@ -27,7 +27,9 @@ class HttpRequest {
     getInsideConfig() {
         return {
             baseURL: this.baseUrl,
-            headers: {}
+            headers: {
+                "X_Auth_Token": getToken()
+            }
         }
     }
 
@@ -36,7 +38,6 @@ class HttpRequest {
     }
 
     interceptors(instance, url) {
-
         // 请求拦截
         instance.interceptors.request.use(config => {
             this.queue[url] = true;

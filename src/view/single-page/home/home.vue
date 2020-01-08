@@ -9,10 +9,10 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">22</div>
+                        <div class="right">{{count.allUserCount}}</div>
                         <div style="align-self: flex-end;margin-bottom: 3px;color: green">
                             <Icon type="ios-arrow-up" style="width: 9px;"/>
-                            3
+                            2
                         </div>
                     </div>
                     <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户数</div>
@@ -26,13 +26,13 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">22</div>
+                        <div class="right">{{count.yesterdayCount}}</div>
                         <div style="align-self: flex-end;margin-bottom: 3px;color: red">
                             <Icon type="ios-arrow-down" style="width: 9px;"/>
                             3
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户数</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日新增用户</div>
                 </div>
             </div>
             <div class="index-displayCard"
@@ -43,13 +43,13 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">22</div>
+                        <div class="right">{{count.yesterdayCreatTimeCount}}</div>
                         <div style="align-self: flex-end;margin-bottom: 3px;color: red">
                             <Icon type="ios-arrow-down" style="width: 9px;"/>
-                            3
+                            5
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户数</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日学习时间</div>
                 </div>
             </div>
             <div class="index-displayCard"
@@ -60,13 +60,13 @@
                 </div>
                 <div style="width: 60%">
                     <div style="display: flex;justify-content: center;">
-                        <div class="right">22</div>
+                        <div class="right">{{count.yesterdayUsedCount}}</div>
                         <div style="align-self: flex-end;margin-bottom: 3px;color: red">
                             <Icon type="ios-arrow-down" style="width: 9px;"/>
-                            3
+                            5
                         </div>
                     </div>
-                    <div style="display: flex;justify-content: center;width: 100%;color: grey">总计用户数</div>
+                    <div style="display: flex;justify-content: center;width: 100%;color: grey">昨日活跃用户</div>
                 </div>
             </div>
         </div>
@@ -74,14 +74,30 @@
 </template>
 
 <script>
+    import {adminCount} from '@/api/data'
+
     export default {
         name: 'home',
         data() {
-            return {}
+            return {
+                count:{
+                    allUserCount: 0,
+                    yesterdayCount: 0,
+                    yesterdayCreatTimeCount: 0,
+                    yesterdayUsedCount: 0,
+                }
+            }
         },
         created() {
+            this.getAdminCount();
         },
-        methods: {}
+        methods: {
+            getAdminCount() {
+                adminCount().then(res => {
+                  this.count = res.data.data;
+                })
+            }
+        }
     }
 </script>
 

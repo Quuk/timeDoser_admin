@@ -66,8 +66,8 @@ export default {
         // 登录
         handleLogin({commit}, data) {
             return new Promise((resolve, reject) => {
-                commit('setToken', data.X_Auth_Token)
-                commit('setAccess', ['admin'])
+                commit('setToken', data.token);
+                commit('setAccess', ['admin']);
                 resolve()
             }).catch(error => {
                 reject(error)
@@ -84,8 +84,8 @@ export default {
                 //   reject(err)
                 // })
                 // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-                commit('setToken', '')
-                commit('setAccess', [])
+                commit('setToken', '');
+                commit('setAccess', []);
                 resolve()
             })
         },
