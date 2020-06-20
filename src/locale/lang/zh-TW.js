@@ -42,16 +42,5 @@ export default {
   tree_table_page: '樹狀表格',
   org_tree_page: '組織結構樹',
   drag_drawer_page: '可拖動抽屜',
-  tree_select_page: '樹狀下拉選擇器',
-  actity: '活动运营',
-  coupon: '优惠券相关',
-  business: '商品相关',
-  company: '公司相关',
-  industry_class: '行业信息',
-  newCompany: '新增企业信息',
-  newCustomer: '新增用户信息',
-  newOrder: '新增订单信息',
-  controller: '控制台',
-  operationalData: '运营数据',
-  temp: 'temp',
+  tree_select_page: '樹狀下拉選擇器'
 }

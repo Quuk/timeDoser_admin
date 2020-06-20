@@ -42,16 +42,5 @@ export default {
   tree_table_page: 'Tree Table',
   org_tree_page: 'Org Tree',
   drag_drawer_page: 'Draggable Drawer',
-  tree_select_page: 'Tree Selector',
-  actity: 'actity',
-  coupon: 'coupon',
-  business: 'business',
-  company: 'company',
-  industry_class: 'industry_class',
-  newCompany: 'newCompany',
-  newCustomer: 'newCustomer',
-  newOrder: 'newOrder',
-  operationalData: 'operationalData',
-  controller: 'controller',
-  temp: 'temp',
+  tree_select_page: 'Tree Selector'
 }
