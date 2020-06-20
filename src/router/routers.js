@@ -83,10 +83,10 @@ export default [
         name: 'tools_methods_page',
         meta: {
           icon: 'ios-hammer',
-          title: '项目设置',
+          title: '角色管理',
           beforeCloseName: 'before_close_normal'
         },
-        component: () => import('@/view/tools-methods/tools-methods.vue')
+        component: () => import('@/view/manage/role-manage.vue')
       }
     ]
   },

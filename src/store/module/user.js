@@ -13,7 +13,7 @@ import { setToken, getToken } from '@/libs/util'
 
 export default {
   state: {
-    userName: '',
+    userName: '白菜',
     userId: '',
     avatarImgPath: '',
     token: getToken(),
