@@ -26,7 +26,7 @@ export default {
   excel: 'Excel',
   'upload-excel': '上传excel',
   'export-excel': '导出excel',
-  tools_methods_page: '工具函数',
+  tools_methods_page: '项目设置',
   drag_list_page: '拖拽列表',
   i18n_page: '多语言',
   modalTitle: '模态框题目',
