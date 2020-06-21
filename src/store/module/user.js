@@ -13,7 +13,7 @@ import { setToken, getToken } from '@/libs/util'
 
 export default {
   state: {
-    userName: '白菜',
+    userName: '',
     userId: '',
     avatarImgPath: '',
     token: getToken(),
@@ -78,14 +78,15 @@ export default {
       userName = userName.trim()
       return new Promise((resolve, reject) => {
         login({ userName, password }).then(res => {
-          console.log(res)
-          console.log('------结束请求-----')
-
-          // const data = res.data
-          // commit('setToken', data.token)
-          commit('setAccess', [])
-          commit('setToken', '')
-          resolve()
+          if (res.data.status === true) {
+            const data = res.data.data
+            commit('setToken', data.token)
+            commit('setAvatar', data.avatar)
+            commit('setUserId', data.id)
+            commit('setUserName', data.username)
+            commit('setAccess', data.authoritiesString.split(','))
+            resolve()
+          }
         }).catch(err => {
           reject(err)
         })
