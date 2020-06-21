@@ -12,9 +12,10 @@ export const login = ({ userName, password }) => {
   })
 }
 
+// 获取用户信息
 export const getUserInfo = () => {
   return axios.request({
-    url: '/main/account/info',
+    url: '/main/account/userInfo',
     method: 'get'
   })
 }
