@@ -27,9 +27,15 @@
       ...mapActions(['handleLogin']),
       handleSubmit({userName, password}) {
         this.handleLogin({userName, password}).then(res => {
-          // this.$router.push({
-          //   name: this.$config.homeName
-          // })
+          if (res.status === true) {
+            this.$router.push({
+              name: this.$config.homeName
+            })
+          } else {
+            this.$Notice.warning({
+              title: res.msg,
+            });
+          }
         })
       }
     }
