@@ -88,8 +88,8 @@ export default {
             commit('setHasGetInfo', true)
           }
           resolve(res.data)
-        }).catch(err => {
-          reject(err)
+        }).catch(() => {
+          resolve(false)
         })
       })
     },
@@ -114,10 +114,9 @@ export default {
     // 获取用户相关信息
     getUserInfo({state, commit}) {
       return new Promise((resolve, reject) => {
-        login({userName: "15927019642", password: "123456"}).then(res => {
+        getUserInfo().then(res => {
           if (res.data.status === true) {
             const data = res.data.data
-            commit('setToken', data.token)
             commit('setAvatar', data.avatar)
             commit('setUserId', data.id)
             commit('setUserName', data.username)
@@ -125,29 +124,9 @@ export default {
             commit('setHasGetInfo', true)
           }
           resolve(res.data)
-        }).catch(err => {
-          reject(err)
+        }).catch(() => {
+          resolve(false)
         })
-
-        /*  这里由于一直跨域无法解决,所以直接放弃 */
-        // try {
-        //   console.log('发送请求')
-        //   getUserInfo().then(res => {
-        //     console.log('获得请求结果')
-        //     console.log(res)
-        //     // const data = res.data
-        //     // commit('setAvatar', data.avatar)
-        //     // commit('setUserName', data.name)
-        //     // commit('setUserId', data.user_id)
-        //     // commit('setAccess', data.access)
-        //     // commit('setHasGetInfo', true)
-        //     // resolve(data)
-        //   }).catch(err => {
-        //     reject(err)
-        //   })
-        // } catch (error) {
-        //   reject(error)
-        // }
       })
     },
 

@@ -6,7 +6,7 @@ export const login = ({ userName, password }) => {
     password: btoa(password)
   }
   return axios.request({
-    url: '/main/login/userPassword',
+    url: '/api/main/login/userPassword',
     method: 'post',
     data: data
   })
@@ -15,7 +15,7 @@ export const login = ({ userName, password }) => {
 // 获取用户信息
 export const getUserInfo = () => {
   return axios.request({
-    url: '/main/account/userInfo',
+    url: '/api/main/account/userInfo',
     method: 'get'
   })
 }
