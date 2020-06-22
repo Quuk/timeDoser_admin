@@ -74,17 +74,26 @@ export default [
     path: '/tools_methods',
     name: 'tools_methods',
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      icon: 'ios-hammer',
+      title: '系统管理'
     },
     component: Main,
     children: [
       {
-        path: 'tools_methods_page',
-        name: 'tools_methods_page',
+        path: 'userInfo',
+        name: 'userInfo',
         meta: {
           icon: 'ios-hammer',
-          title: '角色管理',
-          beforeCloseName: 'before_close_normal'
+          title: '用户信息'
+        },
+        component: () => import('@/view/manage/userInfo.vue')
+      }, {
+        path: 'roleInfo',
+        name: 'roleInfo',
+        meta: {
+          icon: 'ios-hammer',
+          title: '角色管理'
         },
         component: () => import('@/view/manage/role-manage.vue')
       }
