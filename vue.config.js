@@ -35,9 +35,26 @@ module.exports = {
       .set('_c', resolve('src/components'))
   },
   // 设为false打包时不生成.map文件
-  productionSourceMap: false
+  productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   // devServer: {
   //   proxy: 'localhost:3000'
   // }
+  devServer: {
+    open: true, // 是否自动弹出浏览器页面
+    host: 'localhost',
+    port: '8080',
+    https: false, // 是否使用https协议
+    hotOnly: false, // 是否开启热更新
+    proxy: {
+      '/api': {
+        target: 'http://localhost:2110', // API服务器的地址
+        ws: true, // 代理websockets
+        changeOrigin: true, // 虚拟的站点需要更管origin
+        pathRewrite: { // 重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
+          '^/api': ''
+        }
+      }
+    }
+  }
 }
