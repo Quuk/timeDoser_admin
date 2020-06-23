@@ -11,30 +11,20 @@
     </div>
     <div style="margin: 10px 0 20px 20px;color: grey;font-size: 13px">
       1.价格活动是有单独页面的,需要单独进行处理<br/>
-      2.价格活动上架以后需要手动去修改价格<br/>
-      3.排序数字范围为1-10序号越小排在越前面
-      4.活动添加以后如果需要推送,参考这里 <a
-      href="https://qinghi.oss-cn-qingdao.aliyuncs.com/temp/RE2020-06-08%20%E6%B4%BB%E5%8A%A8%E8%BF%90%E8%90%A5%E6%89%8B%E5%86%8C.html"
-      target="_blank">运营后台说明</a>
+      2.价格活动上架以后需要手动去修改价格
     </div>
 
     <div style="margin-bottom: 10px;display: flex;justify-content: space-between">
       <ButtonGroup>
-        <Button :type="findAllParan.status===0?'primary':'default'" @click="changeButtonType(0)">
-          全部
-        </Button>
         <Button :type="findAllParan.status===1?'primary':'default'" @click="changeButtonType(1)">
-          进行中
+          正常
         </Button>
         <Button :type="findAllParan.status===2?'primary':'default'" @click="changeButtonType(2)">
-          已下线
-        </Button>
-        <Button :type="findAllParan.status===3?'primary':'default'" @click="changeButtonType(3)">
-          隐藏
+          注销
         </Button>
       </ButtonGroup>
       <div>
-        <Button type="primary" @click="actionDetailModal=true" style="margin-right: 15px">定制新的运营活动</Button>
+        <!--        <Button type="primary" @click="actionDetailModal=true" style="margin-right: 15px">定制新的运营活动</Button>-->
         <Button @click="findAll" type="primary">
           <Icon type="md-refresh"/>
           刷新
@@ -57,45 +47,49 @@
     </div>
 
     <!-- 活动详情 -->
-    <Modal width="70" ok-text="确定"
+    <Modal width="50" ok-text="确定"
            v-model="actionDetailModal"
-           title="活动详情" style="user-select: none;"
-           @on-ok="modalOk" @on-cancel="modalCancel">
-      <Form :label-width="180">
-        <FormItem v-if="activeDetail.id" label="活动ID" style="margin: 0">
-          <span style="color: grey; margin-right: 30px">{{activeDetail.id}}</span>
+           title="用户详情" style="user-select: none;"
+           @on-ok="modalOk" @on-cancel="reset">
+      <div style="display: flex;justify-content: center;margin-bottom: 30px">
+        <Avatar
+          :src="detail.avatarUrl"
+          style="width: 90px;height: 90px"/>
+      </div>
+      <Form :label-width="200">
+        <FormItem v-if="detail.id" label="用户姓名" style="margin: 0">
+          <span style="color: grey; margin-right: 30px">{{detail.username}}</span>
         </FormItem>
-        <FormItem label="活动名称"
+        <FormItem label="账户状态"
                   style="margin:2px 0;">
-          <input style="color: grey; margin-right: 30px; width: 500px;" v-model="activeDetail.name"/>
-        </FormItem>
-        <FormItem label="活动状态"
-                  style="margin:2px 0;">
-          <RadioGroup v-model="activeDetail.status">
-            <Radio :label="1">进行中</Radio>
-            <Radio :label="2">已下线</Radio>
-            <Radio :label="3">隐藏</Radio>
+          <RadioGroup v-model="detail.enable">
+            <Radio :label="1">正常</Radio>
+            <Radio :label="2">注销</Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem label="活动排序"
+        <FormItem label="创建时间"
                   style="margin:2px 0;">
-          <InputNumber :max="10" :min="1" v-model="activeDetail.sort"/>
+          <span>{{detail.createdate}}</span>
         </FormItem>
-        <FormItem label="活动封面图片"
+        <FormItem label="注册地址"
                   style="margin:2px 0;">
-          <input style="color: grey; margin-right: 30px; width: 500px;" v-model="activeDetail.coverUrl"/>
+          <span>{{detail.country}} - {{detail.province}} - {{detail.city}}</span>
         </FormItem>
-        <FormItem label="活动H5"
+        <FormItem label="性别"
                   style="margin:2px 0;">
-          <input style="color: grey; margin-right: 30px; width: 500px;" v-model="activeDetail.activityUrl"/>
+          {{detail.gender===1?'男':'女'}}
         </FormItem>
-        <FormItem label="活动页面链接"
+        <FormItem label="手机号"
                   style="margin:2px 0;">
-          <input style="color: grey; margin-right: 30px; width: 500px;" v-model="activeDetail.pageUrl"/>
+          <span>{{detail.mobilephone}}</span>
         </FormItem>
-        <FormItem label="页面内头部图片"
+        <FormItem label="邮箱"
                   style="margin:2px 0;">
-          <input style="color: grey; margin-right: 30px; width: 500px;" v-model="activeDetail.showPictures"/>
+          <span>{{detail.email}}</span>
+        </FormItem>
+        <FormItem label="个人签名"
+                  style="margin:2px 0;">
+          <span>{{detail.personalizedSignature}}</span>
         </FormItem>
       </Form>
     </Modal>
@@ -103,147 +97,140 @@
 </template>
 
 <script>
-  import {userGetAll, userDetail, userUpdate} from '@/api/user'
+import { userGetAll, userDetail, userUpdate } from '@/api/user'
 
-  export default {
-    data() {
-      return {
-        priceAction: false,
-        hasChange: false,
-        columns: [
-          {
-            title: '创建时间',
-            key: 'createdate',
-          }, {
-            title: '状态',
-            key: 'enable',
-          }, {
-            title: '用户名',
-            key: 'username',
-          }, {
-            title: '手机号',
-            key: 'mobilephone',
-          }, {
-            title: '账号类型',
-            key: 'accountType',
-          }, {
-            title: '操作',
-            slot: 'action',
-            width: 120,
-            align: 'center'
-          }
-        ],
-        actionDetailModal: false,
-        salesList: [],
-        salesCount: 0,
-        findAllParan: {
-          currentPage: 1,
-          pageSize: 10,
-          status: null,
-        },
-        activeDetail: {
-          id: null,
-          name: null,
-          status: 3,
-          activityUrl: null,
-          coverUrl: null,
-          pageUrl: null,
-          sort: 0
+export default {
+  data () {
+    return {
+      priceAction: false,
+      hasChange: false,
+      columns: [
+        {
+          title: '创建时间',
+          key: 'createdate'
+        }, {
+          title: '状态',
+          key: 'enable'
+        }, {
+          title: '用户名',
+          key: 'username'
+        }, {
+          title: '手机号',
+          key: 'mobilephone'
+        }, {
+          title: '账号创建类型',
+          key: 'createType'
+        }, {
+          title: '操作',
+          slot: 'action',
+          width: 120,
+          align: 'center'
         }
-      }
-    },
-    created() {
-      this.findAll();
-    },
-    methods: {
-
-      // 查看详情
-      showInfo(id) {
-        this.actionDetailModal = true;
-        this.findDetail(id)
+      ],
+      actionDetailModal: false,
+      salesList: [],
+      salesCount: 0,
+      findAllParan: {
+        currentPage: 1,
+        pageSize: 10
       },
+      detail: {}
+    }
+  },
+  created () {
+    this.findAll()
+  },
+  methods: {
 
-      // 点击了退出
-      modalCancel() {
-        this.actionDetailModal = false;
-        this.reset()
-      },
+    // 查看详情
+    showInfo (id) {
+      this.actionDetailModal = true
+      this.findDetail(id)
+    },
 
-      // 点击确定
-      modalOk() {
-        if (this.activeDetail.name === null || this.activeDetail.coverUrl === null || this.activeDetail.activityUrl === null) {
-          this.$Notice.error({
-            title: '操作失败',
-            desc: '活动名称 / 活动封面 / 活动H5不可为空'
-          });
-          return;
+    // 点击确定
+    modalOk () {
+      userUpdate(this.detail).then(res => {
+        if (res.status === 200 && res.data.status === true) {
+          this.$Notice.info({ title: res.data.msg })
+        } else {
+          this.$Notice.error({ title: '用户信息修改失败!' })
         }
-        this.activeDetail.updateDate = null;
-        userUpdate(this.activeDetail).then(() => {
-          this.findAll();
-        })
-        this.actionDetailModal = false;
-        this.reset()
-      },
 
-      // 分类查询活动
-      changeButtonType(type) {
-        this.findAllParan.status = type;
-        this.findAll();
-      },
-
-      // 查看详情
-      findDetail(id) {
-        userDetail(id).then(res => {
-          // if (res.data.success === true) {
-          //   this.activeDetail = res.data.data
-          // }
-        })
-      },
-
-      // 查看所有
-      findAll() {
-        userGetAll(this.findAllParan).then(res => {
-          if (res.data.status === true) {
-            this.salesList = res.data.data
-            this.salesCount = res.data.total
-
-            // 修改数据
-            this.salesList.forEach(i => {
-              let statusStr = '';
-              if (i.enable === 0) {
-                statusStr = 'error'
-              } else if (i.enable === 1) {
-                statusStr = '正常'
-              } else if (i.enable === 2) {
-                statusStr = '已注销'
-              }
-              i.enable = statusStr
-            })
-          }
-        })
-      },
-
-      // 分页查询
-      pageChange(res) {
-        this.findAllParan.pageSize = res
         this.findAll()
-      },
+      })
+      this.actionDetailModal = false
+      this.reset()
+    },
 
-      // 数据复原
-      reset() {
-        this.activeDetail = {
-          id: null,
-          name: null,
-          status: 3,
-          activityUrl: null,
-          coverUrl: null,
-          pageUrl: null,
-          sort: 0
-        }
+    // 分类查询活动
+    changeButtonType (type) {
+      this.findAllParan = {
+        currentPage: 1,
+        pageSize: 10
       }
+      this.findAllParan.status = type
+      this.findAll()
+    },
+
+    // 查看详情
+    findDetail (id) {
+      userDetail(id).then(res => {
+        if (res.data.status === true) {
+          this.detail = res.data.data
+        }
+      })
+    },
+
+    // 查看所有
+    findAll () {
+      userGetAll(this.findAllParan).then(res => {
+        if (res.data.status === true) {
+          this.salesList = res.data.data
+          this.salesCount = res.data.total
+
+          // 修改数据
+          this.salesList.forEach(i => {
+            switch (i.enable) {
+              case 0:
+                i.enable = 'error'
+                break
+              case 1:
+                i.enable = '正常'
+                break
+              case 2:
+                i.enable = '已注销'
+                break
+            }
+
+            switch (i.createType) {
+              case 0:
+                i.createType = 'error'
+                break
+              case 1:
+                i.createType = '小程序注册'
+                break
+              case 2:
+                i.createType = '手机号注册'
+                break
+            }
+          })
+        }
+      })
+    },
+
+    // 分页查询
+    pageChange (res) {
+      this.findAllParan.pageSize = res
+      this.findAll()
+    },
+
+    // 数据复原
+    reset () {
+      this.detail = {}
     }
   }
+}
 </script>
 
 <style lang="less">
