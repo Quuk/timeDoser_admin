@@ -192,27 +192,15 @@
             // 修改数据
             this.salesList.forEach(i => {
               switch (i.enable) {
-                case 0:
-                  i.enable = 'error';
-                  break;
-                case 1:
-                  i.enable = '正常';
-                  break;
-                case 2:
-                  i.enable = '已注销';
-                  break;
+                case 0:  i.enable = 'error'; break;
+                case 1:  i.enable = '正常'; break;
+                case 2:  i.enable = '已注销'; break;
               }
 
               switch (i.createType) {
-                case 0:
-                  i.createType = 'error';
-                  break;
-                case 1:
-                  i.createType = '小程序注册';
-                  break;
-                case 2:
-                  i.createType = '手机号注册';
-                  break;
+                case 0:  i.createType = 'error'; break;
+                case 1:  i.createType = '小程序注册'; break;
+                case 2:  i.createType = '手机号注册'; break;
               }
             })
           }
