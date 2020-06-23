@@ -97,140 +97,140 @@
 </template>
 
 <script>
-import { userGetAll, userDetail, userUpdate } from '@/api/user'
+  import {userGetAll, userDetail, userUpdate} from '@/api/user'
 
-export default {
-  data () {
-    return {
-      priceAction: false,
-      hasChange: false,
-      columns: [
-        {
-          title: '创建时间',
-          key: 'createdate'
-        }, {
-          title: '状态',
-          key: 'enable'
-        }, {
-          title: '用户名',
-          key: 'username'
-        }, {
-          title: '手机号',
-          key: 'mobilephone'
-        }, {
-          title: '账号创建类型',
-          key: 'createType'
-        }, {
-          title: '操作',
-          slot: 'action',
-          width: 120,
-          align: 'center'
-        }
-      ],
-      actionDetailModal: false,
-      salesList: [],
-      salesCount: 0,
-      findAllParan: {
-        currentPage: 1,
-        pageSize: 10
-      },
-      detail: {}
-    }
-  },
-  created () {
-    this.findAll()
-  },
-  methods: {
-
-    // 查看详情
-    showInfo (id) {
-      this.actionDetailModal = true
-      this.findDetail(id)
-    },
-
-    // 点击确定
-    modalOk () {
-      userUpdate(this.detail).then(res => {
-        if (res.status === 200 && res.data.status === true) {
-          this.$Notice.info({ title: res.data.msg })
-        } else {
-          this.$Notice.error({ title: '用户信息修改失败!' })
-        }
-
-        this.findAll()
-      })
-      this.actionDetailModal = false
-      this.reset()
-    },
-
-    // 分类查询活动
-    changeButtonType (type) {
-      this.findAllParan = {
-        currentPage: 1,
-        pageSize: 10
+  export default {
+    data() {
+      return {
+        priceAction: false,
+        hasChange: false,
+        columns: [
+          {
+            title: '创建时间',
+            key: 'createdate',
+          }, {
+            title: '状态',
+            key: 'enable',
+          }, {
+            title: '用户名',
+            key: 'username',
+          }, {
+            title: '手机号',
+            key: 'mobilephone',
+          }, {
+            title: '账号创建类型',
+            key: 'createType',
+          }, {
+            title: '操作',
+            slot: 'action',
+            width: 120,
+            align: 'center'
+          }
+        ],
+        actionDetailModal: false,
+        salesList: [],
+        salesCount: 0,
+        findAllParan: {
+          currentPage: 1,
+          pageSize: 10,
+        },
+        detail: {}
       }
-      this.findAllParan.status = type
-      this.findAll()
     },
-
-    // 查看详情
-    findDetail (id) {
-      userDetail(id).then(res => {
-        if (res.data.status === true) {
-          this.detail = res.data.data
-        }
-      })
+    created() {
+      this.findAll();
     },
+    methods: {
 
-    // 查看所有
-    findAll () {
-      userGetAll(this.findAllParan).then(res => {
-        if (res.data.status === true) {
-          this.salesList = res.data.data
-          this.salesCount = res.data.total
+      // 查看详情
+      showInfo(id) {
+        this.actionDetailModal = true;
+        this.findDetail(id)
+      },
 
-          // 修改数据
-          this.salesList.forEach(i => {
-            switch (i.enable) {
-              case 0:
-                i.enable = 'error'
-                break
-              case 1:
-                i.enable = '正常'
-                break
-              case 2:
-                i.enable = '已注销'
-                break
-            }
+      // 点击确定
+      modalOk() {
+        userUpdate(this.detail).then(res => {
+          if (res.status === 200 && res.data.status === true) {
+            this.$Notice.info({title: res.data.msg});
+          } else {
+            this.$Notice.error({title: "用户信息修改失败!"});
+          }
 
-            switch (i.createType) {
-              case 0:
-                i.createType = 'error'
-                break
-              case 1:
-                i.createType = '小程序注册'
-                break
-              case 2:
-                i.createType = '手机号注册'
-                break
-            }
-          })
-        }
-      })
-    },
+          this.findAll();
+        })
+        this.actionDetailModal = false;
+        this.reset()
+      },
 
-    // 分页查询
-    pageChange (res) {
-      this.findAllParan.pageSize = res
-      this.findAll()
-    },
+      // 分类查询活动
+      changeButtonType(type) {
+        this.findAllParan = {
+          currentPage: 1,
+          pageSize: 10,
+        };
+        this.findAllParan.status = type;
+        this.findAll();
+      },
 
-    // 数据复原
-    reset () {
-      this.detail = {}
+      // 查看详情
+      findDetail(id) {
+        userDetail(id).then(res => {
+          if (res.data.status === true) {
+            this.detail = res.data.data
+          }
+        })
+      },
+
+      // 查看所有
+      findAll() {
+        userGetAll(this.findAllParan).then(res => {
+          if (res.data.status === true) {
+            this.salesList = res.data.data
+            this.salesCount = res.data.total
+
+            // 修改数据
+            this.salesList.forEach(i => {
+              switch (i.enable) {
+                case 0:
+                  i.enable = 'error';
+                  break;
+                case 1:
+                  i.enable = '正常';
+                  break;
+                case 2:
+                  i.enable = '已注销';
+                  break;
+              }
+
+              switch (i.createType) {
+                case 0:
+                  i.createType = 'error';
+                  break;
+                case 1:
+                  i.createType = '小程序注册';
+                  break;
+                case 2:
+                  i.createType = '手机号注册';
+                  break;
+              }
+            })
+          }
+        })
+      },
+
+      // 分页查询
+      pageChange(res) {
+        this.findAllParan.pageSize = res
+        this.findAll()
+      },
+
+      // 数据复原
+      reset() {
+        this.detail = {}
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
