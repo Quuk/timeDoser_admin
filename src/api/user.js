@@ -63,6 +63,112 @@ export const userUpdate = formData => {
   })
 }
 
+// --------------- 角色信息 ------------------------
+
+/**
+ * 查看所有角色信息
+ *
+ * @return data
+ */
+export const roleGetAll = formData => {
+  return axios.request({
+    url: '/api/main/manage/role/getAll',
+    method: 'post',
+    data: formData
+  })
+}
+
+/**
+ * 查看角色信息细节
+ *
+ * @return data
+ */
+export const roleDetail = formData => {
+  return axios.request({
+    url: '/api/main/manage/role/getOne?id=' + formData,
+    method: 'get'
+  })
+}
+
+/**
+ * 修改一个角色信息
+ *
+ * @return data
+ */
+export const roleUpdate = formData => {
+  return axios.request({
+    url: '/api/main/manage/role/updateOne',
+    method: 'post',
+    data: formData
+  })
+}
+
+/**
+ * 添加一个角色信息
+ *
+ * @return data
+ */
+export const roleAdd = formData => {
+  return axios.request({
+    url: '/api/main/manage/role/addOne',
+    method: 'post',
+    data: formData
+  })
+}
+
+// --------------- 权限信息 ------------------------
+
+/**
+ * 查看所有权限信息
+ *
+ * @return data
+ */
+export const authGetAll = formData => {
+  return axios.request({
+    url: '/api/main/manage/auth/getAll',
+    method: 'post',
+    data: formData
+  })
+}
+
+/**
+ * 查看权限信息细节
+ *
+ * @return data
+ */
+export const authDetail = formData => {
+  return axios.request({
+    url: '/api/main/manage/auth/getOne?id=' + formData,
+    method: 'get'
+  })
+}
+
+/**
+ * 修改一个权限信息
+ *
+ * @return data
+ */
+export const authUpdate = formData => {
+  return axios.request({
+    url: '/api/main/manage/auth/updateOne',
+    method: 'post',
+    data: formData
+  })
+}
+
+/**
+ * 添加一个权限信息
+ *
+ * @return data
+ */
+export const authAdd = formData => {
+  return axios.request({
+    url: '/api/main/manage/auth/addOne',
+    method: 'post',
+    data: formData
+  })
+}
+
 // -------------- 默认部分 ------------------
 export const logout = (token) => {
   return axios.request({

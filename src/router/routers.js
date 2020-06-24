@@ -96,6 +96,14 @@ export default [
           title: '角色管理'
         },
         component: () => import('@/view/manage/role-manage.vue')
+      }, {
+        path: 'authInfo',
+        name: 'authInfo',
+        meta: {
+          icon: 'ios-hammer',
+          title: '权限管理'
+        },
+        component: () => import('@/view/manage/auth-manage.vue')
       }
     ]
   },

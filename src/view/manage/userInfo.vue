@@ -163,7 +163,7 @@
         this.reset()
       },
 
-      // 分类查询活动
+      // 分类查询
       changeButtonType(type) {
         this.findAllParan = {
           currentPage: 1,
